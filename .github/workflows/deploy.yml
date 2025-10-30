@@ -39,17 +39,11 @@ jobs:
           file: ./frontend/Dockerfile
 
       # -------------------------------
-      # 3️⃣ Déploiement sur ton serveur distant via SSH
+      # 3️⃣ Déploiement sur ton serveur
       # -------------------------------
-      - name: Deploy to remote server
-        uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /home/${{ secrets.SERVER_USER }}/devops-portfolio
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            docker compose pull
-            docker compose up -d --force-recreate
-            docker image prune -f
+      - name: Deploy locally
+        run: |
+          cd ~/DevOps/devops-portfolio
+          docker compose pull
+          docker compose up -d --force-recreate
+          docker image prune -f
