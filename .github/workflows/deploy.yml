@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # -------------------------------
-      # 0️⃣ Récupération du code source
-      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
       # -------------------------------
-      # 1️⃣ Connexion à Docker Hub
+      # 1️⃣ Login to Docker Hub
       # -------------------------------
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -26,24 +23,28 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # -------------------------------
-      # 2️⃣ Build & Push de l’image frontend
+      # 2️⃣ Build & Push Frontend Image
       # -------------------------------
       - name: Build and push frontend image
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
           push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/devops-frontend:latest
-            ${{ secrets.DOCKER_USERNAME }}/devops-frontend:${{ github.run_number }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/devops-frontend:latest
           file: ./frontend/Dockerfile
 
       # -------------------------------
-      # 3️⃣ Déploiement sur ton serveur
+      # 3️⃣ Déploiement sur ton serveur local via SSH
       # -------------------------------
-      - name: Deploy locally
-        run: |
-          cd ~/DevOps/devops-portfolio
-          docker compose pull
-          docker compose up -d --force-recreate
-          docker image prune -f
+      - name: Deploy to remote server
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "=== 🚀 Déploiement en cours sur le serveur ==="
+            cd /home/${{ secrets.SERVER_USER }}/DevOps/devops-portfolio
+            docker compose pull
+            docker compose up -d --force-recreate
+            echo "✅ Déploiement terminé avec succès !"

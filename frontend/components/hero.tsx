@@ -53,8 +53,30 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col justify-center items-center pt-16 md:pt-20 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden"
     >
-      {/* Animated background particles effect with pure CSS */}
+      {/* Animated background with enhanced design */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Gradient orbs */}
+        <div className="absolute top-20 -left-20 w-72 h-72 bg-primary/30 rounded-full blur-3xl animate-blob"></div>
+        <div className="absolute top-40 -right-20 w-72 h-72 bg-cyan-500/30 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-20 left-1/3 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+        
+        {/* Animated lines */}
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{stopColor: 'hsl(var(--primary))', stopOpacity: 0.3}} />
+              <stop offset="100%" style={{stopColor: 'rgb(6, 182, 212)', stopOpacity: 0.3}} />
+            </linearGradient>
+          </defs>
+          <path className="animated-path-1" d="M0,100 Q400,50 800,100 T1600,100" stroke="url(#gradient1)" strokeWidth="2" fill="none" />
+          <path className="animated-path-2" d="M0,300 Q500,250 1000,300 T2000,300" stroke="url(#gradient1)" strokeWidth="2" fill="none" />
+          <path className="animated-path-3" d="M0,500 Q600,450 1200,500 T2400,500" stroke="url(#gradient1)" strokeWidth="2" fill="none" />
+        </svg>
+        
+        {/* Particles */}
         <div className="particles-container">
           {[...Array(50)].map((_, i) => (
             <div
@@ -69,6 +91,11 @@ export function Hero() {
             />
           ))}
         </div>
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-1/4 left-1/4 w-20 h-20 border-2 border-primary/20 rotate-45 animate-float"></div>
+        <div className="absolute top-2/3 right-1/4 w-16 h-16 border-2 border-cyan-500/20 rounded-full animate-float animation-delay-2000"></div>
+        <div className="absolute top-1/2 right-1/3 w-12 h-12 border-2 border-purple-500/20 animate-float animation-delay-4000"></div>
       </div>
       
       <div className={`container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-opacity duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
@@ -227,6 +254,66 @@ export function Hero() {
         .animate-blink {
           animation: blink 1s infinite;
         }
+        
+        /* Blob animation for gradient orbs */
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(20px, -50px) scale(1.1); }
+          50% { transform: translate(-20px, 20px) scale(0.9); }
+          75% { transform: translate(50px, 50px) scale(1.05); }
+        }
+        .animate-blob {
+          animation: blob 20s ease-in-out infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        
+        /* Grid pattern */
+        .bg-grid-pattern {
+          background-image: 
+            linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+          background-size: 50px 50px;
+        }
+        
+        /* Animated paths */
+        .animated-path-1 {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: draw 20s linear infinite;
+        }
+        .animated-path-2 {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: draw 25s linear infinite;
+          animation-delay: 2s;
+        }
+        .animated-path-3 {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: draw 30s linear infinite;
+          animation-delay: 4s;
+        }
+        @keyframes draw {
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+        
+        /* Floating shapes */
+        @keyframes floatShape {
+          0%, 100% { transform: translateY(0) rotate(45deg); }
+          50% { transform: translateY(-20px) rotate(45deg); }
+        }
+        .animate-float {
+          animation: floatShape 6s ease-in-out infinite;
+        }
+        
+        /* Particles */
         .particles-container {
           position: absolute;
           width: 100%;
@@ -239,9 +326,9 @@ export function Hero() {
           background: hsl(var(--primary));
           border-radius: 50%;
           opacity: 0.4;
-          animation: float linear infinite;
+          animation: floatParticle linear infinite;
         }
-        @keyframes float {
+        @keyframes floatParticle {
           0% {
             transform: translate(0, 0) scale(1);
             opacity: 0;

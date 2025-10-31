@@ -47,7 +47,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           <button
             onClick={() => scrollToSection("hero")}
-            className="text-lg md:text-xl font-bold text-foreground hover:text-primary transition-colors"
+            className="text-lg md:text-xl font-bold text-white hover:text-primary transition-colors"
           >
             Fotso|DevOps
           </button>
@@ -58,7 +58,7 @@ export function Header() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-medium text-white hover:text-foreground transition-colors"
               >
                 {item.label}
               </button>
