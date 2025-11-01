@@ -29,7 +29,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/devops-frontend:latest
           file: ./frontend/Dockerfile
 
-      # 3️⃣ Déploiement local (directement sur le runner)
+      # 3️⃣ Déploiement local (directement sur le runner) sur le serveur orion
       - name: Deploy application locally
         run: |
           echo "=== 🚀 Déploiement local en cours ==="
