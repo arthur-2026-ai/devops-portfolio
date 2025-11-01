@@ -50,7 +50,7 @@ export function Contact() {
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
                     <a
-                      href="mailto:contact@example.com"
+                      href="mailto:fotsoclaude316@gmail.com"
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
                       contact@example.com

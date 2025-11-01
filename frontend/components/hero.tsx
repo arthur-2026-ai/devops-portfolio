@@ -161,7 +161,7 @@ export function Hero() {
                 Voir mes projets
               </Button>
 
-              <a href="/Arthur-Fotso-CV.pdf" download>
+              <a href="/Fotso-CV.pdf" download>
                 <Button 
                   size="lg" 
                   variant="secondary" 
@@ -176,7 +176,7 @@ export function Hero() {
             {/* Liens sociaux avec hover effects */}
             <div className="flex items-center justify-center md:justify-start gap-6 pt-4">
               <a
-                href="https://github.com/arthurfotso"
+                href="https://github.com/arthur-2026-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-all hover:scale-110 hover:-translate-y-1"
@@ -194,7 +194,7 @@ export function Hero() {
                 <Linkedin className="h-6 w-6" />
               </a>
               <a
-                href="mailto:arthur.fotso@example.com"
+                href="mailto:fotsoclaude316@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-all hover:scale-110 hover:-translate-y-1"
                 aria-label="Envoyez-moi un email"
               >
