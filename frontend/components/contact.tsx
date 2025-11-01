@@ -66,7 +66,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Localisation</h3>
-                    <p className="text-sm text-muted-foreground">Paris, France</p>
+                    <p className="text-sm text-muted-foreground">Yaounde, Cameroun</p>
                   </div>
                 </div>
               </Card>

@@ -155,7 +155,7 @@ export function About() {
           </div>
 
           {/* Main content */}
-          <div className={`space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed mb-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`space-y-6 text-base md:text-lg text-white leading-relaxed mb-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <p className="text-pretty">
               Je suis un <span className="text-foreground font-semibold bg-primary/10 px-2 py-1 rounded">Ingénieur DevOps</span> et{" "}
               <span className="text-foreground font-semibold bg-cyan-500/10 px-2 py-1 rounded">Administrateur Réseau/Système</span> passionné par la
