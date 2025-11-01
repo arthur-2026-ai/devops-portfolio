@@ -10,24 +10,17 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # -------------------------------
-      # 1️⃣ Récupération du code source
-      # -------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # -------------------------------
-      # 2️⃣ Connexion à Docker Hub
-      # -------------------------------
+      # 1️⃣ Login to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # -------------------------------
-      # 3️⃣ Construction & push du frontend
-      # -------------------------------
+      # 2️⃣ Build & Push Frontend Image
       - name: Build and push frontend image
         uses: docker/build-push-action@v6
         with:
@@ -36,37 +29,11 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/devops-frontend:latest
           file: ./frontend/Dockerfile
 
-      # -------------------------------
-      # 4️⃣ Déploiement automatique sur serveur local
-      # -------------------------------
-      - name: Deploy to local server
-        uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "=== 🚀 Déploiement local en cours ==="
-
-            DEPLOY_PATH="/home/${{ secrets.SERVER_USER }}/DevOps/devops-portfolio"
-            REPO_URL="https://github.com/<ton-username>/<ton-repo>.git"
-
-            # 🔧 Créer le dossier si besoin
-            mkdir -p $DEPLOY_PATH
-            cd $DEPLOY_PATH
-
-            # 🔄 Cloner ou mettre à jour le dépôt
-            if [ ! -d .git ]; then
-              echo "📦 Clonage initial du dépôt..."
-              git clone $REPO_URL .
-            else
-              echo "🔁 Mise à jour du dépôt..."
-              git pull
-            fi
-
-            # 🐳 Déploiement Docker
-            echo "📦 Lancement du déploiement Docker..."
-            docker compose pull
-            docker compose up -d --force-recreate
-
-            echo "✅ Déploiement terminé avec succès !"
+      # 3️⃣ Déploiement local (directement sur le runner) sur le serveur orion
+      - name: Deploy application locally
+        run: |
+          echo "=== 🚀 Déploiement local en cours ==="
+          cd ~/DevOps/devops-portfolio
+          docker compose pull
+          docker compose up -d --force-recreate
+          echo "✅ Déploiement terminé avec succès !"
