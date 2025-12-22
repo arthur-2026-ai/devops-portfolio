@@ -34,9 +34,15 @@ export function Contact() {
     <section id="contact" className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-balance">Contactez-moi</h2>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 tracking-tight">
+              Démarrons un <span className="text-[#0073d5] relative">
+                Projet_
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#0073d5]/20"></span>
+              </span>
+            </h2>
           <p className="text-base md:text-lg text-muted-foreground mb-12 md:mb-16 max-w-2xl text-pretty">
-            Vous avez un projet ou une opportunité ? N'hésitez pas à me contacter. Je serais ravi d'échanger avec vous.
+            Besoin d'optimiser votre infrastructure ou d'automatiser vos déploiements ? 
+              Je suis disponible pour discuter de vos défis techniques.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -53,7 +59,7 @@ export function Contact() {
                       href="mailto:fotsoclaude316@gmail.com"
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      contact@example.com
+                      fotsoclaude316@gmail.com
                     </a>
                   </div>
                 </div>
@@ -72,21 +78,13 @@ export function Contact() {
               </Card>
 
               <div className="flex gap-4">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex-1">
-                  <Card className="p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                    <div className="flex items-center justify-center gap-2">
-                      <Github className="h-5 w-5" />
-                      <span className="text-sm font-medium">GitHub</span>
-                    </div>
-                  </Card>
+                <a href="https://github.com/arthur-2026-ai" className="flex-1 group p-4 rounded-2xl bg-slate-900 text-white flex items-center justify-center gap-3 hover:bg-[#0073d5] transition-all">
+                  <Github size={20} />
+                  <span className="text-xs font-bold uppercase tracking-widest">GitHub</span>
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex-1">
-                  <Card className="p-4 hover:shadow-lg transition-shadow cursor-pointer">
-                    <div className="flex items-center justify-center gap-2">
-                      <Linkedin className="h-5 w-5" />
-                      <span className="text-sm font-medium">LinkedIn</span>
-                    </div>
-                  </Card>
+                <a href="https://linkedin.com/in/arthurfotso" className="flex-1 group p-4 rounded-2xl border border-slate-200 flex items-center justify-center gap-3 hover:border-[#0073d5] hover:text-[#0073d5] transition-all">
+                  <Linkedin size={20} />
+                  <span className="text-xs font-bold uppercase tracking-widest">LinkedIn</span>
                 </a>
               </div>
             </div>

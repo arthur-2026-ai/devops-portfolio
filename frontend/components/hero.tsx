@@ -2,45 +2,44 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ArrowDown, FileDown } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowDown, FileDown, Terminal } from "lucide-react"
+import type { LucideIcon } from "lucide-react" // Importe le type LucideIcon
 
 export function Hero() {
   const [typedText, setTypedText] = useState("")
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
   const [mounted, setMounted] = useState(false)
-  
-  const texts = [
-    "Ingénieur DevOps 💻",
-    "Administrateur Réseau & Système 🌐",
-    "Passionné du Cloud ☁️",
-  ]
+
+  const texts = ["Ingénieur DevOps 💻", "Administrateur Réseau & Système 🌐", "Passionné d'Infrastructure as Code ☁️"]
 
   // Animation de typing
   useEffect(() => {
     setMounted(true)
     const currentText = texts[currentIndex]
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (typedText.length < currentText.length) {
-          setTypedText(currentText.slice(0, typedText.length + 1))
+    const timeout = setTimeout(
+      () => {
+        if (!isDeleting) {
+          if (typedText.length < currentText.length) {
+            setTypedText(currentText.slice(0, typedText.length + 1))
+          } else {
+            setTimeout(() => setIsDeleting(true), 2000)
+          }
         } else {
-          setTimeout(() => setIsDeleting(true), 2000)
+          if (typedText.length > 0) {
+            setTypedText(typedText.slice(0, -1))
+          } else {
+            setIsDeleting(false)
+            setCurrentIndex((currentIndex + 1) % texts.length)
+          }
         }
-      } else {
-        if (typedText.length > 0) {
-          setTypedText(typedText.slice(0, -1))
-        } else {
-          setIsDeleting(false)
-          setCurrentIndex((currentIndex + 1) % texts.length)
-        }
-      }
-    }, isDeleting ? 50 : 100)
+      },
+      isDeleting ? 50 : 100,
+    )
 
     return () => clearTimeout(timeout)
   }, [typedText, isDeleting, currentIndex])
 
-  // Fonction pour scroller vers une section
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -51,121 +50,100 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center items-center pt-16 md:pt-20 bg-gradient-to-br from-background via-background to-primary/5 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center pt-16 md:pt-20 bg-background overflow-hidden"
     >
-      {/* Animated background with enhanced design */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Gradient orbs */}
-        <div className="absolute top-20 -left-20 w-72 h-72 bg-primary/30 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute top-40 -right-20 w-72 h-72 bg-cyan-500/30 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 left-1/3 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
-        
-        {/* Animated lines */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: 'hsl(var(--primary))', stopOpacity: 0.3}} />
-              <stop offset="100%" style={{stopColor: 'rgb(6, 182, 212)', stopOpacity: 0.3}} />
-            </linearGradient>
-          </defs>
-          <path className="animated-path-1" d="M0,100 Q400,50 800,100 T1600,100" stroke="url(#gradient1)" strokeWidth="2" fill="none" />
-          <path className="animated-path-2" d="M0,300 Q500,250 1000,300 T2000,300" stroke="url(#gradient1)" strokeWidth="2" fill="none" />
-          <path className="animated-path-3" d="M0,500 Q600,450 1200,500 T2400,500" stroke="url(#gradient1)" strokeWidth="2" fill="none" />
-        </svg>
-        
-        {/* Particles */}
-        <div className="particles-container">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 20}s`,
-                animationDuration: `${20 + Math.random() * 20}s`,
-              }}
-            />
-          ))}
+      {/* --- BACKGROUND TECHNIQUE --- */}
+      <div className="absolute inset-0 -z-10 overflow-hidden bg-[#030712]">
+        {/* Grille de précision */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-50"></div>
+
+        {/* --- LIGNES DE FLUX (DATA STREAMS) --- */}
+        {/* On utilise des largeurs de 2px et une opacité plus forte pour le test */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-[15%] w-[2px] h-[300px] bg-gradient-to-b from-transparent via-primary to-transparent animate-data-stream opacity-80"></div>
+          <div className="absolute top-0 left-[45%] w-[2px] h-[400px] bg-gradient-to-b from-transparent via-cyan-500 to-transparent animate-data-stream [animation-delay:3s] opacity-60"></div>
+          <div className="absolute top-0 left-[80%] w-[2px] h-[250px] bg-gradient-to-b from-transparent via-purple-500 to-transparent animate-data-stream [animation-delay:1.5s] opacity-70"></div>
         </div>
-        
-        {/* Floating geometric shapes */}
-        <div className="absolute top-1/4 left-1/4 w-20 h-20 border-2 border-primary/20 rotate-45 animate-float"></div>
-        <div className="absolute top-2/3 right-1/4 w-16 h-16 border-2 border-cyan-500/20 rounded-full animate-float animation-delay-2000"></div>
-        <div className="absolute top-1/2 right-1/3 w-12 h-12 border-2 border-purple-500/20 animate-float animation-delay-4000"></div>
+
+        {/* Orbes de couleur */}
+        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/30 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] animate-pulse [animation-delay:2s]"></div>
       </div>
-      
-      <div className={`container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-opacity duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 text-center md:text-left">
-          {/* Photo de profil avec effet de glow */}
+
+      <div
+        className={`container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 transition-all duration-1000 transform ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+      >
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 text-center md:text-left">
+          {/* --- PHOTO DE PROFIL AVEC EFFETS --- */}
           <div className="flex-shrink-0 relative group animate-fade-in-right">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-cyan-500 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-500 animate-pulse"></div>
-            <div className="relative">
+            <div className="relative w-48 h-48 md:w-75 md:h-100">
+              {/* Cercle rotatif en arrière-plan */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary via-cyan-400 to-purple-500 animate-spin-slow opacity-30 group-hover:opacity-60 transition duration-500"></div>
+
+              <div className="absolute inset-2 bg-background rounded-full z-10"></div>
+
               <img
-                src="/profile.png"
-                alt="Arthur Fotso - Ingénieur DevOps"
-                className="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover shadow-2xl border-4 border-primary/40 group-hover:border-primary/60 transition-all duration-300 group-hover:scale-105"
+                src="/claude3.jpeg"
+                alt="Arthur Fotso"
+                className="absolute inset-3 w-[calc(100%-24px)] h-[calc(100%-24px)] rounded-full object-cover z-20 border-2 border-primary/20"
               />
-              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-background">
-                <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
+
+              {/* Badge de statut "Available" */}
+              <div className="absolute bottom-4 right-4 z-30 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-xl border border-primary/20 flex items-center gap-2 animate-bounce-slow">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-tighter text-foreground">
+                  online
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Texte principal */}
-          <div className="max-w-2xl space-y-4 animate-fade-in-left">
-            <p className="text-sm md:text-base text-muted-foreground mb-3 animate-fade-in">
-              Bonjour 👋, je suis
-            </p>
+          {/* --- TEXTE ET ACTIONS --- */}
+          <div className="max-w-2xl space-y-6">
+            <div className="space-y-2">
+              <div className="flex items-center justify-center md:justify-start gap-2 text-primary font-mono text-sm mb-2">
+                
+              </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-cyan-400 to-primary bg-clip-text text-transparent animate-gradient bg-300%">
-              Arthur Fotso
-            </h1>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
+                Claude{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-primary bg-300% animate-gradient">
+                  Fotso
+                </span>
+              </h1>
 
-            {/* Effet de typing */}
-            <div className="h-12 md:h-14 flex items-center justify-center md:justify-start">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-muted-foreground">
-                {typedText}
-                <span className="animate-blink">|</span>
-              </h2>
+              <div className="h-12 flex items-center justify-center md:justify-start">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-muted-foreground">
+                  {typedText}
+                  <span className="ml-1 inline-block w-2 h-6 md:h-8 bg-primary animate-blink"></span>
+                </h2>
+              </div>
             </div>
 
-            {/* Description */}
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed pt-2">
-              J'automatise, déploie et sécurise les infrastructures cloud pour
-              garantir des systèmes <span className="text-primary font-semibold">robustes</span>, 
-              <span className="text-primary font-semibold"> scalables</span> et 
-              <span className="text-primary font-semibold"> fiables</span>.
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
+              Je conçois des infrastructures <span className="text-foreground font-semibold">Cloud-Native</span>{" "}
+              résilientes et j'automatise le cycle de vie applicatif. Mon objectif : transformer la complexité réseau en
+              systèmes <span className="text-primary">scalables</span>.
             </p>
 
             {/* Boutons d'action */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
-              <Button 
-                size="lg" 
-                onClick={() => scrollToSection("contact")} 
-                className="gap-2 group hover:scale-105 transition-transform"
-              >
-                <Mail className="h-4 w-4 group-hover:rotate-12 transition-transform" />
-                Me contacter
-              </Button>
-
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
               <Button
                 size="lg"
-                variant="outline"
                 onClick={() => scrollToSection("projects")}
-                className="gap-2 hover:scale-105 transition-transform"
+                className="gap-2 group shadow-lg shadow-primary/20"
               >
-                Voir mes projets
+                Explorer mes Labs
               </Button>
 
               <a href="/Fotso-CV.pdf" download>
-                <Button 
-                  size="lg" 
-                  variant="secondary" 
-                  className="gap-2 group hover:scale-105 transition-transform"
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-2 group border-primary/20 hover:bg-primary/5 bg-transparent"
                 >
                   <FileDown className="h-4 w-4 group-hover:translate-y-1 transition-transform" />
                   Télécharger CV
@@ -173,190 +151,110 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Liens sociaux avec hover effects */}
-            <div className="flex items-center justify-center md:justify-start gap-6 pt-4">
-              <a
-                href="https://github.com/arthur-2026-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-all hover:scale-110 hover:-translate-y-1"
-                aria-label="Visitez mon profil GitHub"
-              >
-                <Github className="h-6 w-6" />
-              </a>
-              <a
+            {/* Liens sociaux */}
+            <div className="flex items-center justify-center md:justify-start gap-5 pt-4">
+              <SocialLink href="https://github.com/arthur-2026-ai" Icon={Github} label="GitHub" />
+              <SocialLink
                 href="https://linkedin.com/in/arthurfotso"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-blue-500 transition-all hover:scale-110 hover:-translate-y-1"
-                aria-label="Connectez-vous avec moi sur LinkedIn"
-              >
-                <Linkedin className="h-6 w-6" />
-              </a>
-              <a
-                href="mailto:fotsoclaude316@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-all hover:scale-110 hover:-translate-y-1"
-                aria-label="Envoyez-moi un email"
-              >
-                <Mail className="h-6 w-6" />
-              </a>
+                Icon={Linkedin}
+                label="LinkedIn"
+                color="hover:text-blue-500"
+              />
+              <SocialLink href="mailto:fotsoclaude316@gmail.com" Icon={Mail} label="Email" color="hover:text-primary" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Flèche vers la section suivante */}
+      {/* Flèche scroll vers le bas */}
       <button
         onClick={() => scrollToSection("about")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-primary transition-all animate-bounce hover:scale-110"
-        aria-label="Défiler vers la section À propos"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground/50 hover:text-primary transition-all animate-bounce"
+        aria-label="En savoir plus"
       >
-        <ArrowDown className="h-8 w-8" />
+        <ArrowDown className="h-7 w-7" />
       </button>
 
-      {/* Styles CSS personnalisés */}
       <style jsx>{`
         @keyframes gradient {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
         }
         .animate-gradient {
-          animation: gradient 3s ease infinite;
+          animation: gradient 4s ease infinite;
         }
-        .bg-300\% {
+        .bg-300% {
           background-size: 300%;
-        }
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.6s ease-out;
-        }
-        @keyframes fade-in-right {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .animate-fade-in-right {
-          animation: fade-in-right 0.8s ease-out;
-        }
-        @keyframes fade-in-left {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .animate-fade-in-left {
-          animation: fade-in-left 0.8s ease-out 0.2s both;
         }
         @keyframes blink {
           0%, 49% { opacity: 1; }
           50%, 100% { opacity: 0; }
         }
         .animate-blink {
-          animation: blink 1s infinite;
+          animation: blink 0.8s infinite;
         }
-        
-        /* Blob animation for gradient orbs */
-        @keyframes blob {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          25% { transform: translate(20px, -50px) scale(1.1); }
-          50% { transform: translate(-20px, 20px) scale(0.9); }
-          75% { transform: translate(50px, 50px) scale(1.05); }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
-        .animate-blob {
-          animation: blob 20s ease-in-out infinite;
+        .animate-spin-slow {
+          animation: spin-slow 12s linear infinite;
         }
-        .animation-delay-2000 {
-          animation-delay: 2s;
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
         }
-        .animation-delay-4000 {
-          animation-delay: 4s;
+        .animate-bounce-slow {
+          animation: bounce-slow 3s ease-in-out infinite;
         }
-        
-        /* Grid pattern */
-        .bg-grid-pattern {
-          background-image: 
-            linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
-          background-size: 50px 50px;
-        }
-        
-        /* Animated paths */
-        .animated-path-1 {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: draw 20s linear infinite;
-        }
-        .animated-path-2 {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: draw 25s linear infinite;
-          animation-delay: 2s;
-        }
-        .animated-path-3 {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: draw 30s linear infinite;
-          animation-delay: 4s;
-        }
-        @keyframes draw {
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-        
-        /* Floating shapes */
-        @keyframes floatShape {
-          0%, 100% { transform: translateY(0) rotate(45deg); }
-          50% { transform: translateY(-20px) rotate(45deg); }
-        }
-        .animate-float {
-          animation: floatShape 6s ease-in-out infinite;
-        }
-        
-        /* Particles */
-        .particles-container {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-        }
-        .particle {
-          position: absolute;
-          width: 3px;
-          height: 3px;
-          background: hsl(var(--primary));
-          border-radius: 50%;
-          opacity: 0.4;
-          animation: floatParticle linear infinite;
-        }
-        @keyframes floatParticle {
+
+        @keyframes data-stream {
           0% {
-            transform: translate(0, 0) scale(1);
+            transform: translateY(-100vh); /* Commence hors écran en haut */
             opacity: 0;
           }
           10% {
-            opacity: 0.4;
+            opacity: 1;
           }
           90% {
-            opacity: 0.4;
+            opacity: 1;
           }
           100% {
-            transform: translate(var(--tx, 100px), var(--ty, 100px)) scale(0);
+            transform: translateY(100vh); /* Finit hors écran en bas */
             opacity: 0;
           }
         }
-        .particle:nth-child(3n) {
-          --tx: -80px;
-          --ty: 120px;
-        }
-        .particle:nth-child(3n+1) {
-          --tx: 120px;
-          --ty: -90px;
-        }
-        .particle:nth-child(3n+2) {
-          --tx: -100px;
-          --ty: -110px;
+
+        .animate-data-stream {
+          animation: data-stream 5s linear infinite; /* Plus rapide (5s) pour vérifier la visibilité */
         }
       `}</style>
     </section>
+  )
+}
+
+// Sous-composant pour les liens sociaux pour garder le code propre
+
+function SocialLink({
+  href,
+  Icon,
+  label,
+  color = "hover:text-foreground",
+}: {
+  href: string
+  Icon: LucideIcon
+  label: string
+  color?: string
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`text-muted-foreground transition-all duration-300 hover:scale-125 ${color}`}
+      aria-label={label}
+    >
+      <Icon className="h-6 w-6" />
+    </a>
   )
 }

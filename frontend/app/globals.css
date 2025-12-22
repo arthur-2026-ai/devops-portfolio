@@ -4,74 +4,53 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #140648;
-  --foreground: oklch(46.941% 0.07647 255.792);
-  --card: oklch(0.985 0.003 106.423);
-  --card-foreground: oklch(0.18 0.01 264.376);
-  --popover: oklch(0.99 0.002 106.423);
-  --popover-foreground: oklch(0.18 0.01 264.376);
-  --primary: oklch(0.45 0.15 264.376);
-  --primary-foreground: oklch(0.99 0.002 106.423);
-  --secondary: oklch(0.92 0.01 106.423);
-  --secondary-foreground: oklch(0.18 0.01 264.376);
-  --muted: oklch(0.95 0.005 106.423);
-  --muted-foreground: oklch(0.52 0.02 264.376);
-  --accent: oklch(0.65 0.18 184.704);
-  --accent-foreground: oklch(0.99 0.002 106.423);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0.002 106.423);
-  --border: oklch(0.88 0.01 106.423);
-  --input: oklch(0.88 0.01 106.423);
-  --ring: oklch(0.45 0.15 264.376);
-  --chart-1: oklch(0.45 0.15 264.376);
-  --chart-2: oklch(0.65 0.18 184.704);
-  --chart-3: oklch(0.55 0.12 142.495);
-  --chart-4: oklch(0.7 0.16 70.08);
-  --chart-5: oklch(0.6 0.14 303.9);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* --- Mode Clair (Professionnel & Propre) --- */
+  --background: oklch(98% 0.01 260); /* Blanc très légèrement bleuté */
+  --foreground: oklch(20% 0.04 260); /* Gris très foncé (presque noir) */
+  
+  --primary: #0073d5;   /* Bleu "Cisco" professionnel */
+  --primary-foreground: oklch(100% 0 0);
+
+  --secondary: oklch(92% 0.02 260); 
+  --secondary-foreground: oklch(30% 0.05 260);
+
+  --accent: oklch(65% 0.2 190);      /* Cyan "Cloud" pour les points d'intérêt */
+  --accent-foreground: oklch(100% 0 0);
+
+  --muted: oklch(94% 0.01 260);
+  --muted-foreground: oklch(45% 0.05 260);
+
+  --border: oklch(88% 0.02 260);
+  --input: oklch(88% 0.02 260);
+  --ring: oklch(55% 0.18 250);
+
+  --radius: 0.75rem;
 }
 
 .dark {
-  --background: oklch(0.12 0.015 264.376);
-  --foreground: oklch(0.96 0.005 106.423);
-  --card: oklch(0.15 0.018 264.376);
-  --card-foreground: oklch(0.96 0.005 106.423);
-  --popover: oklch(0.12 0.015 264.376);
-  --popover-foreground: oklch(0.96 0.005 106.423);
-  --primary: oklch(0.65 0.18 264.376);
-  --primary-foreground: oklch(0.12 0.015 264.376);
-  --secondary: oklch(0.22 0.02 264.376);
-  --secondary-foreground: oklch(0.96 0.005 106.423);
-  --muted: oklch(0.2 0.02 264.376);
-  --muted-foreground: oklch(0.65 0.03 264.376);
-  --accent: oklch(0.55 0.16 184.704);
-  --accent-foreground: oklch(0.96 0.005 106.423);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.96 0.005 106.423);
-  --border: oklch(0.25 0.025 264.376);
-  --input: oklch(0.25 0.025 264.376);
-  --ring: oklch(0.65 0.18 264.376);
-  --chart-1: oklch(0.65 0.18 264.376);
-  --chart-2: oklch(0.55 0.16 184.704);
-  --chart-3: oklch(0.6 0.14 142.495);
-  --chart-4: oklch(0.7 0.16 70.08);
-  --chart-5: oklch(0.65 0.15 303.9);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* --- Mode Sombre (L'âme du DevOps) --- */
+  /* Un fond très sombre, mais pas noir pur, pour réduire la fatigue visuelle */
+  --background: oklch(14% 0.03 260); 
+  --foreground: oklch(95% 0.02 260); 
+
+  /* Un bleu électrique plus vif pour ressortir sur le noir */
+  --primary: oklch(65% 0.22 260);    
+  --primary-foreground: oklch(14% 0.03 260);
+
+  /* Couleur secondaire : un violet/indigo discret pour l'infrastructure */
+  --secondary: oklch(25% 0.06 260);
+  --secondary-foreground: oklch(90% 0.03 260);
+
+  /* L'accent : le Cyan Terminal ou Vert Pipeline */
+  --accent: oklch(75% 0.18 190);     
+  --accent-foreground: oklch(14% 0.03 260);
+
+  --muted: oklch(22% 0.04 260);
+  --muted-foreground: oklch(70% 0.05 260);
+
+  --border: oklch(28% 0.05 260);
+  --input: oklch(28% 0.05 260);
+  --ring: oklch(65% 0.22 260);
 }
 
 @theme inline {
@@ -120,5 +99,27 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee 50s linear infinite;
+}
+
+/* Pause au survol */
+.animate-marquee-infinite:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .animate-marquee-infinite {
+    animation-duration: 35s;
   }
 }
