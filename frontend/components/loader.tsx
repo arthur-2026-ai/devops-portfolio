@@ -67,7 +67,7 @@ export function Loader() {
       
       {/* Petit texte en bas */}
       <div className="absolute bottom-10 font-mono text-[10px] text-slate-300">
-        FOTSO_DEVOPS_ENGINEER v2.0.25
+        FOTSO_DEVOPS_ENGINEER v2.0
       </div>
     </div>
   )
